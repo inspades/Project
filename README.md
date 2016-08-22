@@ -1,7 +1,7 @@
 # Project
 
 Overview:
-  An ad-revenue website called "SandPhighlow" or "indexpredictions" or something like that.
+  An ad-revenue website called "sAndPhighLow" or "indexPredictions" or something like that.
   Users will be required to register and confirm a valid email address.
   Users will login and input their predictions for the high and/or low of the S&P500 for that trading day. 
   A protocol will then show the user what the average prediction of all users for that day. 
