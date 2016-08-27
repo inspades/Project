@@ -7,6 +7,21 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.0.2.js" integrity="sha256-0u0HIBCKddsNUySLqONjMmWAZMQYlxTRbA8RfvtCAW0=" crossorigin="anonymous"></script>
+  <script>function getData() {
+    var url = "http://query.yahooapis.com/v1/public/yql";
+    var symbol = $("#symbol").val();
+    var data = encodeURIComponent("select * from yahoo.finance.quotes where symbol in ('" + symbol + "')");
+
+    $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=http://datatables.org/alltables.env")
+        .done(function (data) {
+        $("#result").text("Bid Price: " + data.query.results.quote.LastTradePriceOnly);
+    })
+        .fail(function (jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error;
+            $("#result").text('Request failed: ' + err);
+    });
+}</script> 
   <style>
 .jumbotron { 
     background-color: #f4511e; /* Orange */
@@ -20,6 +35,9 @@
   <h1>SP500HighLow.com</h1> 
   <p>Predict Index Highs/Lows and View Average Predictions</p> 
 </div>
+<input type="text" id="symbol" />
+<div id='result'>No Price</div>
+<button type="submit" onClick="getData();">Get Data</button>
 
 </body>
 </html>
